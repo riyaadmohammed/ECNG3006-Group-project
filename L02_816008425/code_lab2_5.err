@@ -1,0 +1,14 @@
+Warning[2074] C:\Studentlab2\L02_816008425\code_lab2_5.c 90 : location PRODH specified in the interrupt save list is redundant
+Warning[2074] C:\Studentlab2\L02_816008425\code_lab2_5.c 90 : location PRODL specified in the interrupt save list is redundant
+Warning[2074] C:\Studentlab2\L02_816008425\code_lab2_5.c 90 : location TABLAT specified in the interrupt save list is redundant
+Warning[2074] C:\Studentlab2\L02_816008425\code_lab2_5.c 90 : location .tmpdata specified in the interrupt save list is redundant
+Warning[2058] C:\Studentlab2\L02_816008425\code_lab2_5.c 81 : call of function without prototype
+Warning[2058] C:\Studentlab2\L02_816008425\code_lab2_5.c 87 : call of function without prototype
+Warning[2054] C:\Studentlab2\L02_816008425\code_lab2_5.c 100 : suspicious pointer conversion
+Warning[2054] C:\Studentlab2\L02_816008425\code_lab2_5.c 159 : suspicious pointer conversion
+Warning[2066] C:\Studentlab2\L02_816008425\code_lab2_5.c 160 : type qualifier mismatch in assignment
+Warning[2066] C:\Studentlab2\L02_816008425\code_lab2_5.c 161 : type qualifier mismatch in assignment
+Warning[2066] C:\Studentlab2\L02_816008425\code_lab2_5.c 169 : type qualifier mismatch in assignment
+Warning[2066] C:\Studentlab2\L02_816008425\code_lab2_5.c 173 : type qualifier mismatch in assignment
+Warning[2066] C:\Studentlab2\L02_816008425\code_lab2_5.c 202 : type qualifier mismatch in assignment
+Warning[2066] C:\Studentlab2\L02_816008425\code_lab2_5.c 203 : type qualifier mismatch in assignment
