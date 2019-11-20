@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <timers.h>
-
+#include <pwm.h>
 
 
 #pragma config WDT = OFF //Disable watchdog timer
@@ -15,6 +15,7 @@
 /*************Global Variable Declarations*********************/
 
 volatile int heartBeats =0;
+volatile int heartBeatz ;
 volatile int heartrate;
 volatile int allowCount=0;
 volatile int countsamples=0;
@@ -70,6 +71,19 @@ void init_Timer0(void){
     OpenTimer0(TIMER_INT_ON & T0_16BIT & T0_SOURCE_INT & T0_PS_1_256);
 }
 
+void startHeartBeatSample(void){
+    
+    INTCONbits.TMR0IE = 1;          //Enable Timer0 Interrupt
+    INTCONbits.TMR0IF = 0;          //Clear Timer0 Interrupt Flag
+    INTCON2bits.TMR0IP = 1;          //Timer0 High Priority
+    WriteTimer0(0x676A);            //Timer interrupts at 10s w/256 prescaler
+    //WriteTimer0(57224); 
+    TRISDbits.RD3 = 0;
+    PORTDbits.RD3 =1;
+    allowCount = 0;
+
+}
+
 void HRV(void){
     if(pulse==1){
         pulse1= ReadTimer0();
@@ -89,22 +103,9 @@ void HRV(void){
         while(BusyXLCD());
         Delay1KTCYx(110); //Give time for LCD to refresh, writing to it too quickly causes flicker issues
         while(BusyXLCD());
-        sprintf(out,"HRV: %d ms",interval);
+        sprintf(out,"HR interval: %d ms",interval);
         putsXLCD(out); 
     }
-}
-
-void startHeartBeatSample(void){
-    
-    INTCONbits.TMR0IE = 1;          //Enable Timer0 Interrupt
-    INTCONbits.TMR0IF = 0;          //Clear Timer0 Interrupt Flag
-    INTCON2bits.TMR0IP = 1;          //Timer0 High Priority
-    WriteTimer0(0x676A);            //Timer interrupts at 10s w/256 prescaler
-    //WriteTimer0(57224); 
-    TRISDbits.RD3 = 0;
-    PORTDbits.RD3 =1;
-    allowCount = 0;
-
 }
 
 void stopHeartBeatSample(void){
@@ -113,7 +114,6 @@ void stopHeartBeatSample(void){
     PORTDbits.RD3 =0;
     INTCON3bits.INT2IE = 0;
     CloseTimer0();
-    
     while(BusyXLCD());
     SetDDRamAddr(0x00); //Set cursor to top line
     while(BusyXLCD());
@@ -123,26 +123,41 @@ void stopHeartBeatSample(void){
     HRv=Hrv;
     sprintf(out,"HRV:%d %",HRv);
     putsXLCD(out);
-    /*if(allowCount==1){
+    if(allowCount==1){
     while(BusyXLCD());
-    SetDDRamAddr(0x00); //Set cursor to top line
+    SetDDRamAddr(0x14); //Set cursor to top line
     while(BusyXLCD());
     Delay1KTCYx(110); //Give time for LCD to refresh, writing to it too quickly causes flicker issues
     while(BusyXLCD());
     heartBeats = (6*heartBeats);
+    heartBeatz = heartBeats;
     sum = sum + heartBeats;
     avg = sum/countsamples;
     Avg=avg;
     sprintf(out,"Heartrate:%d BPM",heartBeats);
     putsXLCD(out);
     while(BusyXLCD());
-    SetDDRamAddr(0x40); //Set cursor to top line
+    SetDDRamAddr(0x54); //Set cursor to top line
     while(BusyXLCD());
     Delay1KTCYx(110); //Give time for LCD to refresh, writing to it too quickly causes flicker issues
     while(BusyXLCD());
     sprintf(out,"Avg HR: %d BPM",Avg);
     putsXLCD(out); 
-    }*/
+     if(heartBeatz>100)
+         {
+          OpenTimer2(  TIMER_INT_OFF &    T2_PS_1_16 & T2_POST_1_1  );
+          OpenPWM1(2000);
+          SetDCPWM1(511);
+          
+         
+         }
+    if(heartBeatz<=100)
+         {
+          CloseTimer1();
+          ClosePWM1();
+                   
+         }
+    }
     
 }
 
@@ -151,7 +166,7 @@ void heartBeatCount(void){
     if(allowCount==0){
     heartBeats++;
     while(BusyXLCD());
-    SetDDRamAddr(0x00); //Set cursor to top line
+    SetDDRamAddr(0x14); //Set cursor to top line
     while(BusyXLCD());
     Delay1KTCYx(110); //Give time for LCD to refresh, writing to it too quickly causes flicker issues
     while(BusyXLCD());
@@ -164,7 +179,7 @@ void resetcount(void){
     INTCON3bits.INT2IP = 1;
     INTCON2bits.INTEDG2 = 0;
     INTCON3bits.INT2IE = 1;
-    
+    INTCONbits.RBIF = 0;
     
     
     OpenTimer0(TIMER_INT_ON & T0_16BIT & T0_SOURCE_INT & T0_PS_1_256);
@@ -173,7 +188,6 @@ void resetcount(void){
     allowCount=0;
     NN50=0;
     NN=0;
-    
 }
     
  
@@ -194,7 +208,7 @@ void high_ISR(void){
     
     if(INTCON3bits.INT2IF==1){
         INTCON3bits.INT2IE = 0;
-        //heartBeatCount();
+        heartBeatCount();
         pulse++;
         HRV();
         INTCON3bits.INT2IF = 0;
@@ -221,9 +235,10 @@ void high_ISR(void){
 /******************MAIN CODE******************/
  
  void main(){
+     heartBeatz = 0;
      sum=0;
      heartrate=0;
-     pulse=0;
+       pulse=0;
      pulse1=0;
      pulse2=0;
      NN=0;
@@ -235,7 +250,7 @@ void high_ISR(void){
      RCONbits.IPEN = 1;              //Enable Priority Levels
      
      INTCON3bits.INT1IP = 1;
-     INTCON2bits.INTEDG1 = 0;
+     INTCON2bits.INTEDG1 = 1;
      INTCON3bits.INT1IE = 1;
      
      INTCONbits.GIE = 1;
@@ -244,5 +259,8 @@ void high_ISR(void){
      INTCON2bits.TMR0IP = 1;          //Timer0 High Priority
      
      //startHeartBeatSample();
-     while(1){}
+     while(1){
+        
+     
+     }
  }

@@ -57,17 +57,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=C:/Studentlab2/L02_816008425/lcd.c "C:/Studentlab2/L02_816008425/heart rate variability.c"
+SOURCEFILES_QUOTED_IF_SPACED=C:/Studentlab2/L02_816008425/lcd.c C:/Studentlab2/L02_816008425/integration.c C:/Studentlab2/L02_816008425/scrolling.c "C:/Studentlab2/L02_816008425/shift reg.c"
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/_ext/808926576/lcd.o "${OBJECTDIR}/_ext/808926576/heart rate variability.o"
-POSSIBLE_DEPFILES=${OBJECTDIR}/_ext/808926576/lcd.o.d "${OBJECTDIR}/_ext/808926576/heart rate variability.o.d"
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/_ext/808926576/lcd.o ${OBJECTDIR}/_ext/808926576/integration.o ${OBJECTDIR}/_ext/808926576/scrolling.o "${OBJECTDIR}/_ext/808926576/shift reg.o"
+POSSIBLE_DEPFILES=${OBJECTDIR}/_ext/808926576/lcd.o.d ${OBJECTDIR}/_ext/808926576/integration.o.d ${OBJECTDIR}/_ext/808926576/scrolling.o.d "${OBJECTDIR}/_ext/808926576/shift reg.o.d"
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/_ext/808926576/lcd.o ${OBJECTDIR}/_ext/808926576/heart\ rate\ variability.o
+OBJECTFILES=${OBJECTDIR}/_ext/808926576/lcd.o ${OBJECTDIR}/_ext/808926576/integration.o ${OBJECTDIR}/_ext/808926576/scrolling.o ${OBJECTDIR}/_ext/808926576/shift\ reg.o
 
 # Source Files
-SOURCEFILES=C:/Studentlab2/L02_816008425/lcd.c C:/Studentlab2/L02_816008425/heart rate variability.c
+SOURCEFILES=C:/Studentlab2/L02_816008425/lcd.c C:/Studentlab2/L02_816008425/integration.c C:/Studentlab2/L02_816008425/scrolling.c C:/Studentlab2/L02_816008425/shift reg.c
 
 
 CFLAGS=
@@ -109,13 +109,29 @@ ${OBJECTDIR}/_ext/808926576/lcd.o: C:/Studentlab2/L02_816008425/lcd.c  nbproject
 	@${DEP_GEN} -d ${OBJECTDIR}/_ext/808926576/lcd.o 
 	@${FIXDEPS} "${OBJECTDIR}/_ext/808926576/lcd.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c18 
 	
-${OBJECTDIR}/_ext/808926576/heart\ rate\ variability.o: C:/Studentlab2/L02_816008425/heart\ rate\ variability.c  nbproject/Makefile-${CND_CONF}.mk
+${OBJECTDIR}/_ext/808926576/integration.o: C:/Studentlab2/L02_816008425/integration.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}/_ext/808926576" 
-	@${RM} "${OBJECTDIR}/_ext/808926576/heart rate variability.o".d 
-	@${RM} "${OBJECTDIR}/_ext/808926576/heart rate variability.o" 
-	${MP_CC} $(MP_EXTRA_CC_PRE) -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1 -p$(MP_PROCESSOR_OPTION) -I"C:/Studentlab2/L02_816008425" -I"C:/Program Files (x86)/Microchip/mplabc18/v3.47/h" -I"C:/Users/816008425/Downloads/FreeRTOSv10.2.1/FreeRTOS/Source/include" -I"C:/Users/816008425/Downloads/FreeRTOSv10.2.1/FreeRTOS/Source/portable/MPLAB/PIC18F" -ml -oa- -Ls -o-  -I ${MP_CC_DIR}\\..\\h  -fo "${OBJECTDIR}/_ext/808926576/heart rate variability.o"   "C:/Studentlab2/L02_816008425/heart rate variability.c" 
-	@${DEP_GEN} -d "${OBJECTDIR}/_ext/808926576/heart rate variability.o" 
-	@${FIXDEPS} "${OBJECTDIR}/_ext/808926576/heart rate variability.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c18 
+	@${RM} ${OBJECTDIR}/_ext/808926576/integration.o.d 
+	@${RM} ${OBJECTDIR}/_ext/808926576/integration.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1 -p$(MP_PROCESSOR_OPTION) -I"C:/Studentlab2/L02_816008425" -I"C:/Program Files (x86)/Microchip/mplabc18/v3.47/h" -I"C:/Users/816008425/Downloads/FreeRTOSv10.2.1/FreeRTOS/Source/include" -I"C:/Users/816008425/Downloads/FreeRTOSv10.2.1/FreeRTOS/Source/portable/MPLAB/PIC18F" -ml -oa- -Ls -o-  -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/_ext/808926576/integration.o   C:/Studentlab2/L02_816008425/integration.c 
+	@${DEP_GEN} -d ${OBJECTDIR}/_ext/808926576/integration.o 
+	@${FIXDEPS} "${OBJECTDIR}/_ext/808926576/integration.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c18 
+	
+${OBJECTDIR}/_ext/808926576/scrolling.o: C:/Studentlab2/L02_816008425/scrolling.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/_ext/808926576" 
+	@${RM} ${OBJECTDIR}/_ext/808926576/scrolling.o.d 
+	@${RM} ${OBJECTDIR}/_ext/808926576/scrolling.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1 -p$(MP_PROCESSOR_OPTION) -I"C:/Studentlab2/L02_816008425" -I"C:/Program Files (x86)/Microchip/mplabc18/v3.47/h" -I"C:/Users/816008425/Downloads/FreeRTOSv10.2.1/FreeRTOS/Source/include" -I"C:/Users/816008425/Downloads/FreeRTOSv10.2.1/FreeRTOS/Source/portable/MPLAB/PIC18F" -ml -oa- -Ls -o-  -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/_ext/808926576/scrolling.o   C:/Studentlab2/L02_816008425/scrolling.c 
+	@${DEP_GEN} -d ${OBJECTDIR}/_ext/808926576/scrolling.o 
+	@${FIXDEPS} "${OBJECTDIR}/_ext/808926576/scrolling.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c18 
+	
+${OBJECTDIR}/_ext/808926576/shift\ reg.o: C:/Studentlab2/L02_816008425/shift\ reg.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/_ext/808926576" 
+	@${RM} "${OBJECTDIR}/_ext/808926576/shift reg.o".d 
+	@${RM} "${OBJECTDIR}/_ext/808926576/shift reg.o" 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1 -p$(MP_PROCESSOR_OPTION) -I"C:/Studentlab2/L02_816008425" -I"C:/Program Files (x86)/Microchip/mplabc18/v3.47/h" -I"C:/Users/816008425/Downloads/FreeRTOSv10.2.1/FreeRTOS/Source/include" -I"C:/Users/816008425/Downloads/FreeRTOSv10.2.1/FreeRTOS/Source/portable/MPLAB/PIC18F" -ml -oa- -Ls -o-  -I ${MP_CC_DIR}\\..\\h  -fo "${OBJECTDIR}/_ext/808926576/shift reg.o"   "C:/Studentlab2/L02_816008425/shift reg.c" 
+	@${DEP_GEN} -d "${OBJECTDIR}/_ext/808926576/shift reg.o" 
+	@${FIXDEPS} "${OBJECTDIR}/_ext/808926576/shift reg.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c18 
 	
 else
 ${OBJECTDIR}/_ext/808926576/lcd.o: C:/Studentlab2/L02_816008425/lcd.c  nbproject/Makefile-${CND_CONF}.mk
@@ -126,13 +142,29 @@ ${OBJECTDIR}/_ext/808926576/lcd.o: C:/Studentlab2/L02_816008425/lcd.c  nbproject
 	@${DEP_GEN} -d ${OBJECTDIR}/_ext/808926576/lcd.o 
 	@${FIXDEPS} "${OBJECTDIR}/_ext/808926576/lcd.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c18 
 	
-${OBJECTDIR}/_ext/808926576/heart\ rate\ variability.o: C:/Studentlab2/L02_816008425/heart\ rate\ variability.c  nbproject/Makefile-${CND_CONF}.mk
+${OBJECTDIR}/_ext/808926576/integration.o: C:/Studentlab2/L02_816008425/integration.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}/_ext/808926576" 
-	@${RM} "${OBJECTDIR}/_ext/808926576/heart rate variability.o".d 
-	@${RM} "${OBJECTDIR}/_ext/808926576/heart rate variability.o" 
-	${MP_CC} $(MP_EXTRA_CC_PRE) -p$(MP_PROCESSOR_OPTION) -I"C:/Studentlab2/L02_816008425" -I"C:/Program Files (x86)/Microchip/mplabc18/v3.47/h" -I"C:/Users/816008425/Downloads/FreeRTOSv10.2.1/FreeRTOS/Source/include" -I"C:/Users/816008425/Downloads/FreeRTOSv10.2.1/FreeRTOS/Source/portable/MPLAB/PIC18F" -ml -oa- -Ls -o-  -I ${MP_CC_DIR}\\..\\h  -fo "${OBJECTDIR}/_ext/808926576/heart rate variability.o"   "C:/Studentlab2/L02_816008425/heart rate variability.c" 
-	@${DEP_GEN} -d "${OBJECTDIR}/_ext/808926576/heart rate variability.o" 
-	@${FIXDEPS} "${OBJECTDIR}/_ext/808926576/heart rate variability.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c18 
+	@${RM} ${OBJECTDIR}/_ext/808926576/integration.o.d 
+	@${RM} ${OBJECTDIR}/_ext/808926576/integration.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -p$(MP_PROCESSOR_OPTION) -I"C:/Studentlab2/L02_816008425" -I"C:/Program Files (x86)/Microchip/mplabc18/v3.47/h" -I"C:/Users/816008425/Downloads/FreeRTOSv10.2.1/FreeRTOS/Source/include" -I"C:/Users/816008425/Downloads/FreeRTOSv10.2.1/FreeRTOS/Source/portable/MPLAB/PIC18F" -ml -oa- -Ls -o-  -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/_ext/808926576/integration.o   C:/Studentlab2/L02_816008425/integration.c 
+	@${DEP_GEN} -d ${OBJECTDIR}/_ext/808926576/integration.o 
+	@${FIXDEPS} "${OBJECTDIR}/_ext/808926576/integration.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c18 
+	
+${OBJECTDIR}/_ext/808926576/scrolling.o: C:/Studentlab2/L02_816008425/scrolling.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/_ext/808926576" 
+	@${RM} ${OBJECTDIR}/_ext/808926576/scrolling.o.d 
+	@${RM} ${OBJECTDIR}/_ext/808926576/scrolling.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -p$(MP_PROCESSOR_OPTION) -I"C:/Studentlab2/L02_816008425" -I"C:/Program Files (x86)/Microchip/mplabc18/v3.47/h" -I"C:/Users/816008425/Downloads/FreeRTOSv10.2.1/FreeRTOS/Source/include" -I"C:/Users/816008425/Downloads/FreeRTOSv10.2.1/FreeRTOS/Source/portable/MPLAB/PIC18F" -ml -oa- -Ls -o-  -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/_ext/808926576/scrolling.o   C:/Studentlab2/L02_816008425/scrolling.c 
+	@${DEP_GEN} -d ${OBJECTDIR}/_ext/808926576/scrolling.o 
+	@${FIXDEPS} "${OBJECTDIR}/_ext/808926576/scrolling.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c18 
+	
+${OBJECTDIR}/_ext/808926576/shift\ reg.o: C:/Studentlab2/L02_816008425/shift\ reg.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/_ext/808926576" 
+	@${RM} "${OBJECTDIR}/_ext/808926576/shift reg.o".d 
+	@${RM} "${OBJECTDIR}/_ext/808926576/shift reg.o" 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -p$(MP_PROCESSOR_OPTION) -I"C:/Studentlab2/L02_816008425" -I"C:/Program Files (x86)/Microchip/mplabc18/v3.47/h" -I"C:/Users/816008425/Downloads/FreeRTOSv10.2.1/FreeRTOS/Source/include" -I"C:/Users/816008425/Downloads/FreeRTOSv10.2.1/FreeRTOS/Source/portable/MPLAB/PIC18F" -ml -oa- -Ls -o-  -I ${MP_CC_DIR}\\..\\h  -fo "${OBJECTDIR}/_ext/808926576/shift reg.o"   "C:/Studentlab2/L02_816008425/shift reg.c" 
+	@${DEP_GEN} -d "${OBJECTDIR}/_ext/808926576/shift reg.o" 
+	@${FIXDEPS} "${OBJECTDIR}/_ext/808926576/shift reg.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c18 
 	
 endif
 

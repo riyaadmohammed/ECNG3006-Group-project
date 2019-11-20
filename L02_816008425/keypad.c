@@ -66,7 +66,7 @@ void readAndDisplayKey(void){
 	output =(PORTC&bitmask);  
     switch (output){
         case 0:
-          sprintf(y,"0");
+          sprintf(y,"1");
           break;
         case 16:
           sprintf(y,"4");
@@ -75,7 +75,7 @@ void readAndDisplayKey(void){
           sprintf(y,"7");
           break;
         case 48:
-          sprintf(y,"*");
+          sprintf(y,"0");
           break;
         case 64:
           sprintf(y,"2");
@@ -87,7 +87,7 @@ void readAndDisplayKey(void){
           sprintf(y,"8");
           break;
         case 112:
-          sprintf(y,"0");
+          sprintf(y,"F");
           break;
         case 128:
           sprintf(y,"3");
@@ -99,7 +99,7 @@ void readAndDisplayKey(void){
           sprintf(y,"9");
           break;
         case 176:
-          sprintf(y,"#");
+          sprintf(y,"E");
           break;
         case 192:
           sprintf(y,"A");

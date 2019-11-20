@@ -20,7 +20,7 @@
 
 void main(){
     OpenTimer2(  TIMER_INT_OFF &    T2_PS_1_16 & T2_POST_1_1  );
-    OpenPWM2(255);
+    OpenPWM2(2000);
     SetDCPWM2(511);
 
     while(1){}

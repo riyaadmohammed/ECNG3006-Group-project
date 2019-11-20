@@ -6,6 +6,7 @@
                    projectFiles="true">
       <itemPath>FreeRTOSConfig.h</itemPath>
       <itemPath>C:/Studentlab2/L02_816008425/ow.h</itemPath>
+      <itemPath>C:/Studentlab2/L02_816008425/SST39SF040v2.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -21,7 +22,6 @@
       <itemPath>C:/Users/816008425/Downloads/FreeRTOSv10.2.1/FreeRTOS/Source/portable/MPLAB/PIC18F/port.c</itemPath>
       <itemPath>C:/Users/816008425/Downloads/FreeRTOSv10.2.1/FreeRTOS/Source/portable/MemMang/heap_1.c</itemPath>
       <itemPath>C:/Studentlab2/L02_816008425/code_lab2.c</itemPath>
-      <itemPath>C:/Studentlab2/L02_816008425/lcd.c</itemPath>
       <itemPath>C:/Studentlab2/L02_816008425/code_lab2_3.c</itemPath>
       <itemPath>C:/Studentlab2/L02_816008425/code_lab2_2.c</itemPath>
       <itemPath>C:/Studentlab2/L02_816008425/code_lab2_4.c</itemPath>
@@ -32,6 +32,13 @@
       <itemPath>C:/Studentlab2/L02_816008425/speaker.c</itemPath>
       <itemPath>C:/Studentlab2/L02_816008425/heart rate monitor.c</itemPath>
       <itemPath>C:/Studentlab2/L02_816008425/heart rate variability.c</itemPath>
+      <itemPath>C:/Studentlab2/L02_816008425/HR and HRV.c</itemPath>
+      <itemPath>C:/Studentlab2/L02_816008425/lcd.c</itemPath>
+      <itemPath>C:/Studentlab2/L02_816008425/glucose level.c</itemPath>
+      <itemPath>C:/Studentlab2/L02_816008425/flash.c</itemPath>
+      <itemPath>C:/Studentlab2/L02_816008425/integration.c</itemPath>
+      <itemPath>C:/Studentlab2/L02_816008425/scrolling.c</itemPath>
+      <itemPath>C:/Studentlab2/L02_816008425/shift reg.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -133,6 +140,10 @@
         <property key="stack-analysis-mcc18" value="false"/>
         <property key="stack-analysis-mplink" value="false"/>
       </C18LanguageToolchain>
+      <item path="C:/Studentlab2/L02_816008425/HR and HRV.c"
+            ex="true"
+            overriding="false">
+      </item>
       <item path="C:/Studentlab2/L02_816008425/code_lab2.c"
             ex="true"
             overriding="false">
@@ -205,7 +216,25 @@
         <C18LanguageToolchain>
         </C18LanguageToolchain>
       </item>
+      <item path="C:/Studentlab2/L02_816008425/flash.c" ex="true" overriding="false">
+      </item>
+      <item path="C:/Studentlab2/L02_816008425/glucose level.c"
+            ex="true"
+            overriding="false">
+      </item>
       <item path="C:/Studentlab2/L02_816008425/heart rate monitor.c"
+            ex="true"
+            overriding="false">
+        <C18>
+        </C18>
+        <C18-AS>
+        </C18-AS>
+        <C18-LD>
+        </C18-LD>
+        <C18LanguageToolchain>
+        </C18LanguageToolchain>
+      </item>
+      <item path="C:/Studentlab2/L02_816008425/heart rate variability.c"
             ex="true"
             overriding="false">
       </item>
