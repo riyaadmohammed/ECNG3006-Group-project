@@ -61,15 +61,15 @@ void main(void){
     init_LCD();
     initial_shiftregister();
     initial_FlashMemoryPins();
-    //checkFlashMemoryPresent();
-    //sectorWriteByte(0x0003,0xEE);
-    //sectorWriteByte(0x0004,0xE0);
-    //sectorWriteByte(0x0005,0xE1);
+    checkFlashMemoryPresent();
+    sectorWriteByte(0x0003,0xEE);
+    sectorWriteByte(0x0004,0xE0);
+    sectorWriteByte(0x0005,0xE1);
     //flashWriteAddr(9);
             
   
     while(1){
-    flashWriteAddr(1);
+   /* flashWriteAddr(1);
     Delay10KTCYx(200);
     flashWriteAddr(2);
     Delay10KTCYx(200);
@@ -83,13 +83,13 @@ void main(void){
     Delay10KTCYx(200);
     flashWriteAddr(262144);//binary value 1000000000000000000
     Delay10KTCYx(200);
-    //flashWriteAddr(0x0004);
-   /* SSTPresent=0xFF;
+    //flashWriteAddr(0x0004);*/
+    SSTPresent=0xFF;
     sectorReadByte(0x0003);
     Delay1KTCYx(255);
     sectorReadByte(0x0004);
     Delay1KTCYx(255);
     sectorReadByte(0x0005);
-    Delay1KTCYx(255);*/
+    Delay1KTCYx(255);
     }
 }
