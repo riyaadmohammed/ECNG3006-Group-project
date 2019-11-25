@@ -14,6 +14,9 @@
 
 #pragma config WDT = OFF //Disable watchdog timer
 #pragma config LVP = OFF //Disable low voltage programming
+#pragma config PWRT = OFF       // Power-up Timer Enable bit (PWRT disabled)
+#pragma config BOR = ON         // Brown-out Reset Enable bit (Brown-out Reset enabled)
+#pragma config BORV = 20        // Brown-out Reset Voltage bits (VBOR set to 4.2V)
 
 #define _XTAL_FREQ 4000000UL
 #define bitmask 240
@@ -39,6 +42,9 @@ volatile int NN50;
 volatile float Hrv;
 volatile int HRv;
 volatile int h=0;
+volatile int b=0;
+volatile int c=0;
+volatile int d=0;
 volatile int he=0;
 
 // The system has to measure the ambient temperature (in degrees Centigrade to +/- 0.1 degree Centigrade) at which a reading is taken.
@@ -122,7 +128,7 @@ void HRV(void){
         pulse1= ReadTimer0();
     }
     else if(pulse >1){
-        pulse=0;
+        pulse=1;
         pulse2= ReadTimer0();
         NN++;
         Interval= ((pulse2- pulse1)*256)/100;
@@ -131,6 +137,7 @@ void HRV(void){
             NN50++;
             
         }
+        pulse1 = pulse2;
          while(BusyXLCD());
         SetDDRamAddr(0x40); //Set cursor to top line
         while(BusyXLCD());
@@ -141,7 +148,17 @@ void HRV(void){
     }
 }
 
+void speakeroff(void){
+          h = 0;
+          b=0;
+          c=0;
+          CloseTimer1();
+          ClosePWM1();
+
+}
+
 void stopHeartBeatSample(void){
+    
     allowCount=1;
     countsamples++;
     PORTDbits.RD3 =0;
@@ -154,7 +171,20 @@ void stopHeartBeatSample(void){
     while(BusyXLCD());
     Hrv = ((float)NN50/(float)NN)*100;
     HRv=Hrv;
-    sprintf(out,"HRV:%d %",HRv);
+    if(HRv<=90)
+    {
+          b = 1;
+          OpenTimer2(  TIMER_INT_OFF &    T2_PS_1_16 & T2_POST_1_1  );
+          OpenPWM1(2000);
+          SetDCPWM1(511);
+    }
+     if(HRv>90)
+    {
+          b = 0;
+          CloseTimer1();
+          ClosePWM1();
+    }
+    sprintf(out,"HRV:%d %% G: 0mg/L",HRv);
     putsXLCD(out);
     if(allowCount==1){
     while(BusyXLCD());
@@ -164,13 +194,15 @@ void stopHeartBeatSample(void){
     while(BusyXLCD());
     heartBeats = (6*heartBeats);
     heartBeatz = heartBeats;
+    sprintf(out,"Heartrate:%d BPM",heartBeats);
+    putsXLCD(out);
+    while(BusyXLCD());
     if(he==0)
         {
         sum = sum + heartBeats;
         avg = sum/countsamples;
         Avg=avg;
-        sprintf(out,"Heartrate:%d BPM",heartBeats);
-        putsXLCD(out);
+        
         while(BusyXLCD());
         SetDDRamAddr(0x54); //Set cursor to top line
         while(BusyXLCD());
@@ -181,6 +213,7 @@ void stopHeartBeatSample(void){
         }
      if(heartBeatz>100)
          {
+          h = 1;
           OpenTimer2(  TIMER_INT_OFF &    T2_PS_1_16 & T2_POST_1_1  );
           OpenPWM1(2000);
           SetDCPWM1(511);
@@ -189,6 +222,7 @@ void stopHeartBeatSample(void){
          }
     if(heartBeatz<=100)
          {
+          h = 0;
           CloseTimer1();
           ClosePWM1();
                    
@@ -196,6 +230,19 @@ void stopHeartBeatSample(void){
     if(he==1){
     readTemp();
     obtainInteger();
+    if(temp_integer>28)
+    {
+          c = 1;
+          OpenTimer2(  TIMER_INT_OFF &    T2_PS_1_16 & T2_POST_1_1  );
+          OpenPWM1(2000);
+          SetDCPWM1(511);
+    }
+     if(temp_integer<=28)
+    {
+          c = 0;
+          CloseTimer1();
+          ClosePWM1();
+    }
     obtainFraction();
     obtainSign();
     resetTempConversion();
@@ -258,6 +305,8 @@ void readAndDisplayKey(void){
           break;
         case 32:
           sprintf(y,"7");
+          if(d==0){d=1;}
+          else{d=0;}
           break;
         case 48:
           sprintf(y,"0");
@@ -297,6 +346,7 @@ void readAndDisplayKey(void){
           break;
         case 240:
           sprintf(y,"D");
+          speakeroff();
           break;
           
     }
@@ -376,6 +426,7 @@ void resetTempConversion (void){
 }
 
 void printTemp (void){
+    //while(BusyXLCD);
     SetDDRamAddr(0x54);
     while(BusyXLCD());
     putsXLCD(lcdVariable);
@@ -449,9 +500,9 @@ void high_ISR(void){
      Hrv=0;
      HRv=0;
      init_LCD();
-     //configTemp();
+     configTemp();
      //readTemp();
-    // obtainInteger();
+     //obtainInteger();
      //obtainFraction();
      //obtainSign();
      //resetTempConversion();
@@ -478,7 +529,71 @@ void high_ISR(void){
      INTCON2bits.TMR0IP = 1;          //Timer0 High Priority
      
      //startHeartBeatSample();
-     while(1){ } 
+     while(1){
+      //software unit testing
+     /* resetcount();
+      INTCON3bits.INT2IE = 1;
+      while(INTCON3bits.INT2IE == 1){
+      INTCON3bits.INT2IF=1;
+      Delay10KTCYx(100); 
+      }
+      */
+         while(h==1||b==1||c==1){
+          Delay10KTCYx(100); 
+          CloseTimer1();
+          ClosePWM1();
+          Delay10KTCYx(100); 
+          OpenTimer2(  TIMER_INT_OFF &    T2_PS_1_16 & T2_POST_1_1  );
+          OpenPWM1(2000);
+          SetDCPWM1(511);
+          if(d==1){
+          readTemp();
+          obtainInteger();
+          if(temp_integer>28)
+            {
+                  c = 1;
+                  OpenTimer2(  TIMER_INT_OFF &    T2_PS_1_16 & T2_POST_1_1  );
+                  OpenPWM1(2000);
+                  SetDCPWM1(511);
+            }
+             if(temp_integer<=28)
+            {
+                  c = 0;
+                  CloseTimer1();
+                  ClosePWM1();
+            }
+          obtainFraction();
+          obtainSign();
+          resetTempConversion();
+          printTemp();
+          }
+         }
+         if(h==0||b==0||c==0){
+          CloseTimer1();
+          ClosePWM1();
+         }
+         if(d==1){
+          readTemp();
+          obtainInteger();
+          if(temp_integer>28)
+            {
+                  c = 1;
+                  OpenTimer2(  TIMER_INT_OFF &    T2_PS_1_16 & T2_POST_1_1  );
+                  OpenPWM1(2000);
+                  SetDCPWM1(511);
+            }
+             if(temp_integer<=28)
+            {
+                  c = 0;
+                  CloseTimer1();
+                  ClosePWM1();
+            }
+          obtainFraction();
+          obtainSign();
+          resetTempConversion();
+          printTemp();
+          }
+     } 
     
     
      
